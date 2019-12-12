@@ -1,6 +1,5 @@
 package auxiliary;
 
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,7 +13,6 @@ public class Driver {
 
     public static WebDriver getDriver() {
         EnvParams envParams = new EnvParams();
-        Dimension d = new Dimension(1920, 1080);
         ChromeOptions options = new ChromeOptions();
         if (!envParams.getChromeBinary().equals("")) { options.setBinary(envParams.getChromeBinary()); }
         String chromeDriverOptions = envParams.getChromeDriverOptions();
@@ -23,7 +21,7 @@ public class Driver {
         dc.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
         dc.setCapability(ChromeOptions.CAPABILITY, options);
         driver = new ChromeDriver(dc);
-        driver.manage().window().setSize(d);
+        driver.manage().window().maximize();
         return driver;
     }
 }

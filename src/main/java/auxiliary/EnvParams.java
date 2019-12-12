@@ -13,9 +13,9 @@ public class EnvParams {
     private String userName;
     private String password;
 
-    int WEBDRIVER_WAIT_TIME_SECONDS;
+    private int WEBDRIVER_WAIT_TIME_SECONDS;
     int RETRY_ATTEMPTS_NUMBER;
-    boolean CLOSE_BROWSER = true;
+    private boolean CLOSE_BROWSER = true;
 
     private String chromeDriverOptions;
 
@@ -32,7 +32,7 @@ public class EnvParams {
             RETRY_ATTEMPTS_NUMBER = Integer.parseInt(props.getProperty("retry.attempts.number", "3"));
             CLOSE_BROWSER = Boolean.parseBoolean(props.getProperty("close.browser", "true"));
 
-            System.setProperty("webdriver.chrome.driver", props.getProperty("webdriver.location"));
+            System.setProperty("webdriver.chrome.driver", props.getProperty("webdriver.chrome.driver"));
         } catch (IOException e) {
             environment = System.getProperty("environment");
             userName = System.getProperty("username");
@@ -41,7 +41,7 @@ public class EnvParams {
             WEBDRIVER_WAIT_TIME_SECONDS = Integer.parseInt(System.getProperty("webdriver.wait.seconds", "60"));
             RETRY_ATTEMPTS_NUMBER = Integer.parseInt(System.getProperty("retry.attempts.number", "3"));
 
-            System.setProperty("webdriver.chrome.driver", System.getProperty("webdriver.location", "./chromedriver"));
+            System.setProperty("webdriver.chrome.driver", System.getProperty("webdriver.chrome.driver", "./chromedriver"));
 
         } finally {
             chromeDriverOptions = System.getProperty("chromeDriverOptions", "start-maximized");
@@ -62,4 +62,6 @@ public class EnvParams {
 
     String getChromeDriverOptions() { return chromeDriverOptions; }
     String getChromeBinary() { return chromeBinary; }
+    public int getWebdriverWaitTimeSeconds() { return WEBDRIVER_WAIT_TIME_SECONDS; }
+    public boolean doCloseBrowser() { return CLOSE_BROWSER; }
 }
