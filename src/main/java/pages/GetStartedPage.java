@@ -22,4 +22,9 @@ public class GetStartedPage extends BasePage {
         super(driver, wait);
         waitUntilElementsPresent(Arrays.asList(riskTile, amlTile, financialTile, marketTile, creditCardsTile, socialListeningTile, insuranceTile));
     }
+
+    public RiskPage getOntoRiskPage() {
+        clickBy(riskTile);
+        return new RiskPage(driver, wait);
+    }
 }
