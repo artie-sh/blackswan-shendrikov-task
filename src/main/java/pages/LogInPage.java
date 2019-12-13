@@ -17,11 +17,12 @@ public class LogInPage extends BasePage {
         super(driver, wait);
     }
 
-    public LogInPage logIn(String username, String password, String environment) {
+    public GetStartedPage logIn(String username, String password, String environment) {
         driver.get(environment);
         waitUntilElementsVisible(Arrays.asList(logInPageMottoText, logInUsernameInput, logInPasswordInput, signInButton));
         driver.findElement(logInUsernameInput).sendKeys(username);
         driver.findElement(logInPasswordInput).sendKeys(password);
-        return this;
+        driver.findElement(signInButton).click();
+        return new GetStartedPage(driver, wait);
     }
 }
