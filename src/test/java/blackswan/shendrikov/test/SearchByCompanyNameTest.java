@@ -46,8 +46,19 @@ public class SearchByCompanyNameTest extends BaseTest {
         long dataLoadingTime = companyDetailsPage.checkDataLoading();
         LOGGER.info("data loading time " + dataLoadingTime);
         assertTrue(resultDetailsTime <= 300-resultDetailsTime, String.format("Result details time for %s took longer than 300 seconds", companyDetails.get("companyName")));
+    }
 
+    @Test(dependsOnMethods = {"switchToCompanyDetails"}, retryAnalyzer = RetryAnalyzer.class, description = "User checks intro for the given company")
+    public void checkCompanyIntro() {
+        CompanyDetailsPage companyDetailsPage = new CompanyDetailsPage(driver, wait);
         companyDetailsPage.checkCompanyIntro(companyDetails);
     }
 
+    @Test(dependsOnMethods = {"switchToCompanyDetails"}, retryAnalyzer = RetryAnalyzer.class, description = "User checks intro for the given company")
+    public void switchToFinancialAndAssertData() {
+        CompanyDetailsPage companyDetailsPage = new CompanyDetailsPage(driver, wait);
+        int dataNotFound = companyDetailsPage.checkFinancial();
+        LOGGER.info("data not found time " + dataNotFound);
+        assertTrue(dataNotFound <= 2, String.format("%s data not found assertion error: limit 2, actual %s", companyDetails.get("companyName"), dataNotFound));
+    }
 }
