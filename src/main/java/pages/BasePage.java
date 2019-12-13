@@ -2,6 +2,7 @@ package pages;
 
 import auxiliary.EnvParams;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Arrays;
@@ -12,6 +13,9 @@ public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
     EnvParams envParams;
+
+
+    protected String entityResultsWrapper = "//div[contains(@class, 'entity-results-wrapper')]";
 
     BasePage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -62,5 +66,20 @@ public class BasePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", desiredElement);
         waitUntilElementsVisible(Arrays.asList(element));
         return desiredElement;
+    }
+
+    protected void scrollAndClick(By by) {
+        scrollToView(by);
+        clickBy(by);
+    }
+
+    public void waitForPageLoad(WebDriverWait wait) {
+        ExpectedCondition<Boolean> pageLoadCondition = new
+                ExpectedCondition<Boolean>() {
+                    public Boolean apply(WebDriver driver) {
+                        return ((JavascriptExecutor)driver).executeScript("return document.readyState").equals("complete");
+                    }
+                };
+        wait.until(pageLoadCondition);
     }
 }
