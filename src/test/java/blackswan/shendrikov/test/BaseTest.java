@@ -29,7 +29,9 @@ public class BaseTest extends TestWatcher {
     @BeforeMethod
     public void startUp() {
         try {
+            System.out.println("starting driver");
             driver = Driver.getDriver();
+            System.out.println("driver started");
             wait = new WebDriverWait(driver, envParams.getWebdriverWaitTimeSeconds());
         } catch (Exception e) {
             LOGGER.info("Exception on startUp()");
