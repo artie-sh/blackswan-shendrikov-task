@@ -8,6 +8,7 @@ public class SearchByCompanyNameTest extends BaseTest {
 
     @Test
     public void logInAndSearchByCompanyNameTest() {
+        System.out.println(">>> starting logInAndSearchByCompanyNameTest");
         LogInPage logInPage = new LogInPage(driver, wait);
         GetStartedPage getStartedPage = logInPage.logIn(username, password, environment);
     }

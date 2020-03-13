@@ -19,7 +19,8 @@ public class LogInPage extends BasePage {
 
     public GetStartedPage logIn(String username, String password, String environment) {
         driver.get(environment);
-        waitUntilElementsVisible(Arrays.asList(logInPageMottoText, logInUsernameInput, logInPasswordInput, signInButton));
+        System.out.println(">>> opening environment");
+        waitUntilElementsPresent(Arrays.asList(logInPageMottoText, logInUsernameInput, logInPasswordInput, signInButton));
         driver.findElement(logInUsernameInput).sendKeys(username);
         driver.findElement(logInPasswordInput).sendKeys(password);
         driver.findElement(signInButton).click();
