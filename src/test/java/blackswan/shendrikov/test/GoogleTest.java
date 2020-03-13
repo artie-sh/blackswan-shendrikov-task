@@ -9,7 +9,7 @@ import pages.LogInPage;
 public class GoogleTest extends BaseTest {
 
     @Test
-    public void logInAndSearchByCompanyNameTest() {
+    public void googleTest() {
         System.out.println(">>> starting logInAndSearchByCompanyNameTest");
         driver.get("https://www.google.pl/");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@title='Search']")));

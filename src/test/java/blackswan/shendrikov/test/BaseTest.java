@@ -49,10 +49,10 @@ public class BaseTest extends TestWatcher {
 
     @AfterMethod
     public void tearDown(ITestResult iTestResult) {
-        if (iTestResult.getStatus() == ITestResult.FAILURE) {
-            String className = iTestResult.getTestClass().getName();
-            takeScreen(className.substring(className.lastIndexOf(".") + 1));
-        }
+
+        String className = iTestResult.getTestClass().getName();
+        takeScreen(className.substring(className.lastIndexOf(".") + 1));
+
         if (envParams.doCloseBrowser()) {
             driver.close();
             driver.quit();
