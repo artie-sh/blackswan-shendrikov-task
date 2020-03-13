@@ -3,7 +3,8 @@
 <suite name="Black Swan Technologies Test Suite" parallel="false">
     <test name="Search By Company Name">
         <classes>
-            <class name="blackswan.shendrikov.test.SearchByCompanyNameTest"></class>
+            <!--<class name="blackswan.shendrikov.test.SearchByCompanyNameTest"></class>-->
+            <class name="blackswan.shendrikov.test.GoogleTest"></class>
         </classes>
     </test>>
 </suite>
