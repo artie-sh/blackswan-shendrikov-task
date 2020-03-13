@@ -2,13 +2,20 @@ package blackswan.shendrikov.test;
 
 import auxiliary.Driver;
 import auxiliary.EnvParams;
+import org.apache.commons.io.FileUtils;
 import org.junit.rules.TestWatcher;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -45,6 +52,21 @@ public class BaseTest extends TestWatcher {
         if (envParams.doCloseBrowser()) {
             driver.close();
             driver.quit();
+        }
+
+        if (iTestResult.getStatus() == ITestResult.FAILURE) {
+            String className = iTestResult.getTestClass().getName();
+            takeScreen(className.substring(className.lastIndexOf(".") + 1));
+        }
+    }
+
+    private void takeScreen(String screenShotName) {
+        try {
+            screenShotName = screenShotName + "-" + new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
+            File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(scrFile, new File("target/screenshots/" + screenShotName + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

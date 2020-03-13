@@ -3,3 +3,4 @@ target
 *.iml
 chromedriver*
 config.properties
+config1.properties
