@@ -5,6 +5,7 @@
         <classes>
             <!--<class name="blackswan.shendrikov.test.SearchByCompanyNameTest"></class>-->
             <class name="blackswan.shendrikov.test.GoogleTest"></class>
+            <class name="blackswan.shendrikov.test.SearchByCompanyNameTest"></class>
         </classes>
     </test>>
 </suite>
